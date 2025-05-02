@@ -1,18 +1,24 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
+# Copiar y restaurar dependencias
 COPY *.csproj ./
 RUN dotnet restore
 
+# Copiar el resto del código y compilar
 COPY . ./
 RUN dotnet publish -c Release -o out
 
+# Imagen final
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-#CAMBIAR AQUI EL NOMBRE DEL APLICATIVO
-#nombre de tu app busca en bin\Release**\netcore5.0\plantitas.exe
-ENV APP_NET_CORE pc_2.dll 
+# Configurar el nombre del archivo DLL de tu aplicación
+ENV APP_NET_CORE pc_2.dll
 
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet $APP_NET_CORE
+# Exponer el puerto (Render usa el puerto 8080 por defecto)
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación
+CMD ["dotnet", "pc_2.dll"]
