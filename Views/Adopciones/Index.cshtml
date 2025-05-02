@@ -1,0 +1,28 @@
+@model IEnumerable<dynamic>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adopciones</title>
+</head>
+<body>
+    <h1>Lista de Adopciones</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre de la Mascota</th>
+                <th>Nombre del Adoptante</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var adopcion in Model)
+            {
+                <tr>
+                    <td>@adopcion.MascotaNombre</td>
+                    <td>@adopcion.AdoptanteNombre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

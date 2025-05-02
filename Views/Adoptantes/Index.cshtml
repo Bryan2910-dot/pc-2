@@ -1,0 +1,19 @@
+@model pc_2.Models.Adoptantes
+
+@{
+    ViewBag.Title = "Crear Adoptante";
+}
+
+<h1>Crear Adoptante</h1>
+
+<form method="post" asp-action="Guardar">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" name="Nombre" required />
+        <span class="text-danger" asp-validation-for="Nombre"></span>
+    </div>
+    
+    <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+</form>
+
+<h1>@ViewData["Mensaje"]</h1>
