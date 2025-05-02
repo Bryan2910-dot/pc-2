@@ -7,15 +7,12 @@ RUN dotnet restore
 
 # Copiar el resto del código y compilar
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o /app/out
 
 # Imagen final
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
-
-# Configurar el nombre del archivo DLL de tu aplicación
-ENV APP_NET_CORE pc_2.dll
 
 # Exponer el puerto (Render usa el puerto 8080 por defecto)
 EXPOSE 8080
